@@ -1,5 +1,4 @@
-# fs-test-task
-Full-stack recruitment test task
+# Full-stack Recruitment Test Task (fs-test-task)
 
 We would like you to build a Weather Dashboard as a small web application. 
 
