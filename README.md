@@ -1,7 +1,7 @@
 # fs-test-task
 Full-stack recruitment test task
 
-We would like you to build a small web application for a weather dashboard. 
+We would like you to build a Weather Dashboard as a small web application. 
 
 This repository contains an implementation of the backend part, but it contains some bugs and should be refactored. The Forecast API is built over services like Forecast.io, WeatherBug, WeatherUnderground, etc. and should allow the client to get information about the current and 7-day weather forecast from different API sources. The Cities API is built on top of the Google Places API.
 
