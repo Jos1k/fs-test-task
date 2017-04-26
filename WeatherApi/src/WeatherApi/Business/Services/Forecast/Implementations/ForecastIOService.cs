@@ -17,7 +17,7 @@ namespace WeatherApi.Business.Services.Forecast.Implementations
             _providerSetting = providerSetting;
         }
 
-        public async Task<WeeklyForecast> LoadAsync(float latitude, float longitude)
+        public async Task<WeeklyForecast> LoadAsync(double latitude, double longitude)
         {
             using (var client = new HttpClient())
             {
@@ -35,10 +35,10 @@ namespace WeatherApi.Business.Services.Forecast.Implementations
             var todayForecast = new TodayForecast
             {
                 Date = DateTime.Now.ToString("yyyy-MM-dd"),
-                Humidity = currentlyWeather["temperature"],
+                Humidity = currentlyWeather["humidity"],
                 Pressure = currentlyWeather["pressure"],
                 CloudCover = currentlyWeather["cloudCover"],
-                Temperature = currentlyWeather["humidity"],
+                Temperature = currentlyWeather["temperature"],
                 ApparentTemperature = currentlyWeather["apparentTemperature"]
             };
 

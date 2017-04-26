@@ -17,11 +17,11 @@ namespace WeatherApi.Business.Services.Forecast.Implementations
             _providerSetting = providerSetting;
         }
 
-        public async Task<WeeklyForecast> LoadAsync(float latitude, float longitude)
+        public async Task<WeeklyForecast> LoadAsync(double latitude, double longitude)
         {
             using (var client = new HttpClient())
             {
-                var address = string.Format(_providerSetting.Url, _providerSetting.LicenseKey, latitude, longitude);
+                var address = string.Format(_providerSetting.Url, _providerSetting.LicenseKey, longitude, latitude );
                 var response = await client.GetStringAsync(address).ConfigureAwait(false);
                 return ParseResponse(response);
             }

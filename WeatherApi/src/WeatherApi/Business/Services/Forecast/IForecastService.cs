@@ -5,6 +5,6 @@ namespace WeatherApi.Business.Services.Forecast
 {
     public interface IForecastService
     {
-        Task<WeeklyForecast> LoadAsync(float latitude, float longitude);
+        Task<WeeklyForecast> LoadAsync(double latitude, double longitude);
     }
 }

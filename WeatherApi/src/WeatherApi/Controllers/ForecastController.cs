@@ -18,7 +18,7 @@ namespace WeatherApi.Controllers
         }
 
         // GET: api/forecast?longitude&latitude&source
-        public async Task<WeeklyForecast> Get([FromQuery]float latitude, [FromQuery]float longitude, [FromQuery]string source)
+        public async Task<WeeklyForecast> Get([FromQuery]double latitude, [FromQuery]double longitude, [FromQuery]string source)
         {
             return await _forecastServiceFactory.Create(source).LoadAsync(longitude, latitude);
         }
