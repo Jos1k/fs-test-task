@@ -1,53 +1,33 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using WeatherApi.Business.Services.Citites;
+using WeatherApi.Common.Configuration;
 
 namespace WeatherApi.Controllers
 {
     [Route("api/[controller]")]
     public class CitiesController : Controller
     {
-        [SuppressMessage("ReSharper", "InconsistentNaming")]
-        const string API_KEY = "AIzaSyBGAqm1Q8yXTrT4RxXjNZFf40iVXe7xdTo";
+        private readonly CitiesService _citiesService;
+        public CitiesController(IOptions<CityAPISettings> cityApiSettings)
+        {
+            _citiesService = new CitiesService(cityApiSettings.Value);
+        }
 
         [HttpGet("search")]
         // GET: api/cities/search?byName
         public async Task<string> Search([FromQuery]string byName)
         {
-            return await loadCities(byName);
-        }
-
-        private async Task<string> loadCities(string byName)
-        {
-            using (var client = new HttpClient())
-            {
-                var address = string.Format(
-                    "https://maps.googleapis.com/maps/api/place/autocomplete/json?input={0}&types=(cities)&key={1}",
-                    byName,
-                    API_KEY);
-                var response = await client.GetStringAsync(address).ConfigureAwait(false);
-                return response;
-            }
+            return await _citiesService.LoadCities(byName);
         }
 
         [HttpGet("{placeId}")]
         public async Task<string> Get(string placeId)
         {
-            return await loadDataAboutCity(placeId);
+            return await _citiesService.LoadDataAboutCity(placeId);
         }
 
-        private async Task<string> loadDataAboutCity(string placeId)
-        {
-            using (var client = new HttpClient())
-            {
-                var address = string.Format(
-                    "https://maps.googleapis.com/maps/api/place/details/json?placeid={0}&key={1}",
-                    placeId,
-                    API_KEY);
-                var response = await client.GetStringAsync(address).ConfigureAwait(false);
-                return response;
-            }
-        }
+
     }
 }

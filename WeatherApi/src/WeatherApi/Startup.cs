@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using WeatherApi.Common.Configuration;
 
 namespace WeatherApi
 {
@@ -38,6 +39,9 @@ namespace WeatherApi
             services.AddMvc();
 
             services.AddCors();
+
+            services.Configure<CityAPISettings>(Configuration.GetSection("citiApi"));
+            services.Configure<ForecastAPISettings>(Configuration.GetSection("forecastApi"));
 
             services.Configure<CorsOptions>(options =>
             {
