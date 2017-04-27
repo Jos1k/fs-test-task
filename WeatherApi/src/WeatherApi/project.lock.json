@@ -4807,8 +4807,6 @@
       "type": "package",
       "path": "Newtonsoft.Json/9.0.1",
       "files": [
-        "Newtonsoft.Json.9.0.1.nupkg.sha512",
-        "Newtonsoft.Json.nuspec",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
         "lib/net35/Newtonsoft.Json.dll",
@@ -4823,6 +4821,8 @@
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml",
+        "newtonsoft.json.9.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec",
         "tools/install.ps1"
       ]
     },
@@ -5104,8 +5104,6 @@
       "type": "package",
       "path": "System.Collections.NonGeneric/4.0.1",
       "files": [
-        "System.Collections.NonGeneric.4.0.1.nupkg.sha512",
-        "System.Collections.NonGeneric.nuspec",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -5133,7 +5131,9 @@
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._"
+        "ref/xamarinwatchos10/_._",
+        "system.collections.nongeneric.4.0.1.nupkg.sha512",
+        "system.collections.nongeneric.nuspec"
       ]
     },
     "System.Collections.Specialized/4.0.1": {
@@ -5141,8 +5141,6 @@
       "type": "package",
       "path": "System.Collections.Specialized/4.0.1",
       "files": [
-        "System.Collections.Specialized.4.0.1.nupkg.sha512",
-        "System.Collections.Specialized.nuspec",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -5170,7 +5168,9 @@
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._"
+        "ref/xamarinwatchos10/_._",
+        "system.collections.specialized.4.0.1.nupkg.sha512",
+        "system.collections.specialized.nuspec"
       ]
     },
     "System.ComponentModel/4.0.1": {
@@ -9426,11 +9426,30 @@
         "runtime": {
           "lib/netcoreapp1.0/dotnet-publish-iis.dll": {}
         }
+      },
+      "Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Tools/1.1.0-preview4-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Design": "1.1.0-preview4-final",
+          "Microsoft.DotNet.Cli.Utils": "1.0.0-preview2-003121",
+          "Microsoft.DotNet.InternalAbstractions": "1.0.0",
+          "Microsoft.DotNet.ProjectModel.Loader": "1.0.0-preview2-003121",
+          "Microsoft.Extensions.CommandLineUtils": "1.1.0",
+          "Microsoft.NETCore.App": "1.1.0",
+          "System.Runtime.Serialization.Primitives": "4.3.0"
+        },
+        "compile": {
+          "lib/netcoreapp1.0/dotnet-razor-precompile.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp1.0/dotnet-razor-precompile.dll": {}
+        }
       }
     }
   },
   "projectFileToolGroups": {
     ".NETCoreApp,Version=v1.0": [
+      "Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Tools >= 1.1.0-preview4-final",
       "Microsoft.AspNetCore.Server.IISIntegration.Tools >= 1.0.0-preview2-final"
     ]
   }

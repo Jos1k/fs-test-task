@@ -2,9 +2,10 @@
   "name": "chathman_challenge",
   "version": "1.0.0",
   "description": "implementation of test task for chathman financial",
-  "main": "src/app.js",
+  "main": "wwwroot\\src\\app.js",
   "scripts": {
-    "start": "webpack"
+    "start": "webpack-dev-server",
+    "build": "webpack"
   },
   "author": "Ihor Hadzera",
   "license": "MIT",
@@ -15,6 +16,7 @@
     "node-sass": "^4.5.0",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.14.1",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.2"
   }
 }
