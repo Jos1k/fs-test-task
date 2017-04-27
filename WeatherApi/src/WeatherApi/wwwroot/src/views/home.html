@@ -1,12 +1,19 @@
 ﻿<div class="jumbotron">
     <h1>What is Your Weather?</h1>
-    <div class="input-group">
-        <input type="text" class="form-control input-lg" id="cities-autocomplete"placeholder="e.g., Krakow">
-        <span class="input-group-btn">
-            <button class="btn btn-primary btn-lg" type="button">
-                <span class="glyphicon glyphicon-search"></span> Search
-            </button>
-        </span>
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input type="text" class="form-control input-lg" id="cities-autocomplete" placeholder="e.g., Krakow" aria-describedby="search-addon">
+                <span class="input-group-addon" id="search-addon"><span class="glyphicon glyphicon-search"></span> Search</span>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <select id="forecast-source"
+                    ng-model="home.selectedSource"
+                    ng-options="source.value as source.name for source in home.sources"
+                    data-style="btn-success btn-lg">
+            </select>
+        </div>
     </div>
     <h3 ng-show="home.selectedCity">{{home.selectedCity.formatted_address}}</h3>
 </div>

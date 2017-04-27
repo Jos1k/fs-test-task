@@ -1,10 +1,18 @@
 ﻿import "easy-autocomplete";
-import "easy-autocomplete/dist/easy-autocomplete.css";
+import "easy-autocomplete/dist/easy-autocomplete.min.css";
+import "bootstrap-select";
+import "bootstrap-select/dist/css/bootstrap-select.min.css";
 
 class HomeController {
     constructor($scope,$http) {
         const that = this;
         this.$http = $http;
+        this.sources = [
+            { value:'WORLD_WEATHER',name:'World Weather' },
+            { value:'FORECAST_IO',name:'Forecast IO'}
+        ];
+        this.selectedSource = this.sources[0].value;
+
         $scope.$on('$viewContentLoaded', function() {
             $('#cities-autocomplete').easyAutocomplete({
                 url:function(phrase) {
@@ -30,13 +38,14 @@ class HomeController {
                     }
                 }
             });
+            $('#forecast-source').selectpicker();
         });
     }
 
     getForecast(lat,long) {
         return this.$http({
             method: 'GET',
-            url: `/api/forecast?latitude=${lat}&longitude=${long}&source=WORLD_WEATHER`
+            url: `/api/forecast?latitude=${lat}&longitude=${long}&source=${this.selectedSource}`
         });
     }
 }
