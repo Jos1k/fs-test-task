@@ -1,6 +1,6 @@
-﻿var Webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var Path = require('path');
+﻿const Webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Path = require('path');
 
 module.exports = () => {
     return {
@@ -15,13 +15,25 @@ module.exports = () => {
             new HtmlWebpackPlugin({
                 template: 'index.template.ejs',
                 inject: 'body'
+            }),
+            new Webpack.ProvidePlugin({
+                $: "jquery",
+                jQuery: "jquery"
             })
         ],
         module: {
             rules: [
+                { test: /\.html$/, loader: "html-loader" },
                 {
                     test: /\.scss$/,
                     use: ['style-loader', 'css-loader', 'sass-loader']
+                },
+                {
+                    test: /\.js$/,
+                    exclude: /(node_modules|bower_components)/,
+                    use: {
+                        loader: 'babel-loader'
+                    }
                 }
             ]
         },
