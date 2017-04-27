@@ -9,6 +9,7 @@ namespace WeatherApi
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
+                .UseWebRoot("wwwroot/dist")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()

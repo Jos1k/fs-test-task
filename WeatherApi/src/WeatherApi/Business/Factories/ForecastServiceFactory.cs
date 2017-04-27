@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Linq;
+using WeatherApi.Business.Models.Configuration;
 using WeatherApi.Business.Services.Forecast;
 using WeatherApi.Business.Services.Forecast.Implementations;
-using WeatherApi.Common.Configuration;
 
 namespace WeatherApi.Business.Factories
 {
     public class ForecastServiceFactory
     {
-        private readonly ForecastAPISettings _apiSettings;
+        private readonly ForecastApiSettings _apiSettings;
 
-        public ForecastServiceFactory(ForecastAPISettings apiSettings)
+        public ForecastServiceFactory(ForecastApiSettings apiSettings)
         {
             _apiSettings = apiSettings;
         }

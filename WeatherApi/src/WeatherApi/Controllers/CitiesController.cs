@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using WeatherApi.Business.Models.Configuration;
 using WeatherApi.Business.Services.Citites;
-using WeatherApi.Common.Configuration;
 
 namespace WeatherApi.Controllers
 {

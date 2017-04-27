@@ -1,4 +1,4 @@
-﻿namespace WeatherApi.Common.Configuration
+﻿namespace WeatherApi.Business.Models.Configuration
 {
     public class CityAPISettings
     {

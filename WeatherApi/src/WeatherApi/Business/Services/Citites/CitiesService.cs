@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using WeatherApi.Common.Configuration;
+using WeatherApi.Business.Models.Configuration;
 
 namespace WeatherApi.Business.Services.Citites
 {

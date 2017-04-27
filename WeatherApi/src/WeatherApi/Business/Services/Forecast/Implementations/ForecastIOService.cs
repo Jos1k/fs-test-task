@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using WeatherApi.Common.Configuration;
+using WeatherApi.Business.Models.Configuration;
 using WeatherApi.Models;
 
 namespace WeatherApi.Business.Services.Forecast.Implementations

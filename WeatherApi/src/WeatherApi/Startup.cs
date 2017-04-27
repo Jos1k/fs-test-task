@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using WeatherApi.Common.Configuration;
+using WeatherApi.Business.Models.Configuration;
 
 namespace WeatherApi
 {
@@ -41,7 +41,7 @@ namespace WeatherApi
             services.AddCors();
 
             services.Configure<CityAPISettings>(Configuration.GetSection("citiApi"));
-            services.Configure<ForecastAPISettings>(Configuration.GetSection("forecastApi"));
+            services.Configure<ForecastApiSettings>(Configuration.GetSection("forecastApi"));
 
             services.Configure<CorsOptions>(options =>
             {
@@ -62,6 +62,9 @@ namespace WeatherApi
             loggerFactory.AddDebug();
 
             app.UseApplicationInsightsRequestTelemetry();
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseApplicationInsightsExceptionTelemetry();
 

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using WeatherApi.Business.Factories;
-using WeatherApi.Common.Configuration;
+using WeatherApi.Business.Models.Configuration;
 using WeatherApi.Models;
 
 namespace WeatherApi.Controllers
@@ -12,7 +12,7 @@ namespace WeatherApi.Controllers
     {
         private readonly ForecastServiceFactory _forecastServiceFactory;
 
-        public ForecastController(IOptions<ForecastAPISettings> forecastApiSettings)
+        public ForecastController(IOptions<ForecastApiSettings> forecastApiSettings)
         {
             _forecastServiceFactory = new ForecastServiceFactory(forecastApiSettings.Value);
         }

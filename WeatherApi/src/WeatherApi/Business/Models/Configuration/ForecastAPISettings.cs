@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace WeatherApi.Common.Configuration
+namespace WeatherApi.Business.Models.Configuration
 {
-    public class ForecastAPISettings
+    public class ForecastApiSettings
     {
         public List<ForecastProviderSetting> Providers { get; set; }
     }
