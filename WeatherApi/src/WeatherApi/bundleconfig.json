@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "wwwroot/src/app.config.min.js",
+    "inputFiles": [
+      "wwwroot/src/app.config.js"
+    ]
+  }
+]
