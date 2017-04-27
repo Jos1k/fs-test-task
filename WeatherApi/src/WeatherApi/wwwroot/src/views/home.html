@@ -15,5 +15,24 @@
             </select>
         </div>
     </div>
-    <h3 ng-show="home.selectedCity">{{home.selectedCity.formatted_address}}</h3>
+    <div class="row forecastSelectedCard">
+        <div class="col-sm-9">
+            <div ng-show="home.selectedCity && home.selectedForecast" class="row">
+                <div class="col-sm-4">
+                    <h2>{{home.selectedCity.formatted_address}}</h2>
+                    <h3>{{home.selectedForecast.date}}</h3>
+                </div>
+                <div class="col-sm-4">
+                    <h1>{{home.selectedForecast.temperature}}°F</h1>
+                    <h1>({{home.selectedForecast.apparentTemperature}}°F)</h1>
+                </div>
+                <div class="col-sm-4">
+                    <h3>Humidity: {{home.selectedForecast.humidity*100}}%</h3>
+                    <h3>Pressure: ({{home.selectedForecast.pressure}})</h3>
+                    <h3>CloudCover: ({{home.selectedForecast.cloudCover*100}}%)</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
 </div>

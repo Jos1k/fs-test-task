@@ -32,6 +32,7 @@ class HomeController {
                             const location = selectedCity.data.result.geometry.location;
                             that.getForecast(location.lat, location.lng).then(function(forecast) {
                                 that.forecast = forecast.data;
+                                that.selectedForecast = that.forecast.currently;
                                 that.selectedCity = selectedCity.data.result;
                             });
                         });
