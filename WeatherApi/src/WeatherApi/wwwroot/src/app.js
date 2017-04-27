@@ -1,4 +1,6 @@
 ﻿import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'glyphicons';
 import '.\\styles\\style.scss';
 
 import angular from 'angular';
