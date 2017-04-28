@@ -16,13 +16,14 @@
         </div>
     </div>
 </div>
+<div id="forecastSelectedCardAnchor"></div>
 <div class="jumbotron" ng-show="home.forecast">
-    <div class="row forecastSelectedCard">
+    <div class="row">
         <div class="city-name">
             <h1><span class="label label-primary city-name-label">{{home.selectedCity.formatted_address}}</span></h1>
         </div>
-        <div ng-show="home.selectedCity && home.selectedForecast" class="row forecast-details">
-            <div class="col-xs-3">
+        <div ng-show="home.selectedCity && home.selectedForecast" class="row">
+            <div class="col-xs-3 forecast-details">
                 <div class="date-details">
                     <h2 align="center">{{home.selectedForecast.weekday}}</h2>
                     <h2 align="center">({{home.selectedForecast.date}})</h2>
@@ -33,22 +34,34 @@
                     <h3>CloudCover: ({{home.selectedForecast.cloudCover*100}}%)</h3>
                 </div>
             </div>
-            <div class="col-xs-4">
-                <h1>{{home.selectedForecast.temperature}}°F</h1>
-                <h4>(Feels like {{home.selectedForecast.apparentTemperature}}°F)</h4>
+            <div class="col-xs-4 forecast-details">
+                <div ng-show="home.selectedForecast.temperature">
+                    <h1>{{home.selectedForecast.temperature}}°F</h1>
+                    <h4>(Feels like {{home.selectedForecast.apparentTemperature}}°F)</h4>
+                </div>
+                <div ng-show="home.selectedForecast.temperatureMin">
+                    <h2 align="center">Min</h2>
+                    <h1>{{home.selectedForecast.temperatureMin}}°F</h1>
+                    <h4>(Feels like {{home.selectedForecast.apparentTemperatureMin}}°F)</h4>
+                    <h2 align="center">Max</h2>
+                    <h1>{{home.selectedForecast.temperatureMax}}°F</h1>
+                    <h4>(Feels like {{home.selectedForecast.apparentTemperatureMax}}°F)</h4>
+                </div>
             </div>
+
             <div class="col-xs-5">
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active" ng-click="home.selectForecast(home.todayForecast)">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 align="center" class="mb-1">Today</h5>
+                            <h4 class="mb-1">Today</h4>
                         </div>
+                        <p class="mb-1">Temperature: {{home.todayForecast.temperature}}°F</p>
                     </a>
-                    <a ng-repeat="forecast in home.forecast.futureForecasts" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <a ng-repeat="forecast in home.forecast" href="#" class="list-group-item list-group-item-action flex-column align-items-start" ng-click="home.selectForecast(forecast)">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">{{forecast.date}}</h5>
-                            <small>{{forecast.temperatureMin}} - {{forecast.temperatureMax}}</small>
+                            <h4 class="mb-1">{{forecast.weekday}} ({{forecast.date}})</h4>
                         </div>
+                        <p class="mb-1">Temperature range: {{forecast.temperatureMin}}°F - {{forecast.temperatureMax}}°F</p>
                     </a>
                 </div>
             </div>

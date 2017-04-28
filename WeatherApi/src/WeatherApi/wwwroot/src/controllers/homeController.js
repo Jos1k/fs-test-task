@@ -33,8 +33,21 @@ class HomeController {
         const date = moment(currentWeatherData.date);
         currentWeatherData.weekday = date.format('dddd');
         currentWeatherData.date = date.format('MMMM Do');
-        currentWeatherData.temperature = parseInt(currentWeatherData.temperature);
-        currentWeatherData.apparentTemperature = parseInt(currentWeatherData.apparentTemperature);
+        
+        if (currentWeatherData.temperature) {
+
+            currentWeatherData.temperature = parseInt(currentWeatherData.temperature);
+            currentWeatherData.apparentTemperature = parseInt(currentWeatherData.apparentTemperature);
+
+        } else if (currentWeatherData.temperatureMin && currentWeatherData.temperatureMax) {
+
+            currentWeatherData.temperatureMin = parseInt(currentWeatherData.temperatureMin);
+            currentWeatherData.apparentTemperatureMin = parseInt(currentWeatherData.apparentTemperatureMin);
+            
+            currentWeatherData.temperatureMax = parseInt(currentWeatherData.temperatureMax);
+            currentWeatherData.apparentTemperatureMax = parseInt(currentWeatherData.apparentTemperatureMax);
+        }
+       
         currentWeatherData.humidity = parseFloat(currentWeatherData.humidity).toFixed(2);
         return currentWeatherData;
     }
@@ -48,12 +61,23 @@ class HomeController {
             }).then(function (selectedCity) {
                 const location = selectedCity.data.result.geometry.location;
                 that.getForecast(location.lat, location.lng).then(function(forecast) {
-                    that.forecast = forecast.data;
+                    that.forecast = forecast.data.futureForecasts.map(function(obj) {
+                        return that.formatCurrentWeather(obj);
+                    });
                     that.selectedCity = selectedCity.data.result;
-                    that.selectedForecast = that.formatCurrentWeather(that.forecast.currently);
+                    that.todayForecast = that.formatCurrentWeather(forecast.data.currently);
+                    that.selectedForecast = that.todayForecast;
+
+                    $('html, body').animate({
+                        scrollTop: $("#forecastSelectedCardAnchor").offset().top
+                    }, 1000);
                 });
             });
         }
+    }
+
+    selectForecast(selectedForecast) {
+        this.selectedForecast = selectedForecast;
     }
 
     getForecast(lat,long) {
