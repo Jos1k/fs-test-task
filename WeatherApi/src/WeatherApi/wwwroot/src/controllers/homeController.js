@@ -2,6 +2,7 @@
 import "easy-autocomplete/dist/easy-autocomplete.min.css";
 import "bootstrap-select";
 import "bootstrap-select/dist/css/bootstrap-select.min.css";
+import moment from "moment";
 
 class HomeController {
     constructor($scope,$http) {
@@ -15,32 +16,44 @@ class HomeController {
 
         $scope.$on('$viewContentLoaded', function() {
             $('#cities-autocomplete').easyAutocomplete({
-                url:function(phrase) {
-                    return `/api/cities/search?byName=${phrase}`;
-                },
-                getValue: function(element) {
-                    return element.structured_formatting.main_text;
-                },
+                url: (phrase) => { return `/api/cities/search?byName=${phrase}`; },
+                getValue: (element) => { return element.structured_formatting.main_text; },
                 listLocation: "predictions",
-                list: {
-                    onChooseEvent: function() {
-                        const placeId = $('#cities-autocomplete').getSelectedItemData().place_id;
-                        that.$http({
-                            method: 'GET',
-                            url: `/api/cities/${placeId}`
-                        }).then(function (selectedCity) {
-                            const location = selectedCity.data.result.geometry.location;
-                            that.getForecast(location.lat, location.lng).then(function(forecast) {
-                                that.forecast = forecast.data;
-                                that.selectedForecast = that.forecast.currently;
-                                that.selectedCity = selectedCity.data.result;
-                            });
-                        });
-                    }
-                }
+                list: { onChooseEvent: function() {
+                    that.selectedCityId = $('#cities-autocomplete').getSelectedItemData().place_id;
+                    that.loadForecast.apply(that);
+                } }
             });
             $('#forecast-source').selectpicker();
+            $('#forecast-source').on('change', function(){ that.loadForecast.apply(that); });
         });
+    }
+
+    formatCurrentWeather(currentWeatherData) {
+        const date = moment(currentWeatherData.date);
+        currentWeatherData.weekday = date.format('dddd');
+        currentWeatherData.date = date.format('MMMM Do');
+        currentWeatherData.temperature = parseInt(currentWeatherData.temperature);
+        currentWeatherData.apparentTemperature = parseInt(currentWeatherData.apparentTemperature);
+        currentWeatherData.humidity = parseFloat(currentWeatherData.humidity).toFixed(2);
+        return currentWeatherData;
+    }
+
+    loadForecast() {
+        const that = this;
+        if (this.selectedCityId) {
+            this.$http({
+                method: 'GET',
+                url: `/api/cities/${this.selectedCityId}`
+            }).then(function (selectedCity) {
+                const location = selectedCity.data.result.geometry.location;
+                that.getForecast(location.lat, location.lng).then(function(forecast) {
+                    that.forecast = forecast.data;
+                    that.selectedCity = selectedCity.data.result;
+                    that.selectedForecast = that.formatCurrentWeather(that.forecast.currently);
+                });
+            });
+        }
     }
 
     getForecast(lat,long) {

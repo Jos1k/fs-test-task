@@ -8,3 +8,28 @@
     font-size: 18px;
     line-height: 1.3333333;
 }
+
+.forecast-details{ 
+    h1{
+        font-size: 150px;
+        line-height: 80%;
+    }
+    h2{
+        font-size: 45px;
+    }
+    h4{
+        text-align:center;
+        color: #878787
+    }
+    .details-box{
+        padding-top:50px;
+    }
+}
+
+.city-name{
+    margin-bottom: 50px;
+
+    .city-name-label{
+        display:block;
+    }
+}
